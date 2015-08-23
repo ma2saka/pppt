@@ -107,9 +107,9 @@ class PresentationWindow
           text.each_char do |c|
             w.addstr(c)
             w.refresh
-            sleep 0.1
+            sleep 0.05
           end
-          sleep 1
+          sleep 0.5
           @started = true
         else
           w.addstr(text)
