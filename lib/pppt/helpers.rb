@@ -12,7 +12,7 @@ class Helpers
 
   def self.split_screen_width(str, width = 40)
     s = i = r = 0
-    str.each_char.inject([]) do |res, c|
+    str.each_char.each_with_object([]) do |c, res|
       i += c.ascii_only? ? 1 : 2
       r += 1
       next res if i < width
@@ -33,5 +33,4 @@ class Helpers
     title = page['action'] || (page['title'] && " - #{page['title']}") || page['h1'] || page['h2'] || page['h3'] || (page['body'] && "     #{Helpers.truncate_screen_width(page['body'].join(''), 15)}")
     format('%02s    %s', index, title)
   end
-
 end
