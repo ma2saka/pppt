@@ -27,4 +27,11 @@ class Helpers
     hankaku_len = str.each_char.count(&:ascii_only?)
     hankaku_len + (str.size - hankaku_len) * 2
   end
+
+  def self.format_page_number(page)
+    index = page['page'] || '-'
+    title = page['action'] || (page['title'] && " - #{page['title']}") || page['h1'] || page['h2'] || page['h3'] || (page['body'] && "     #{Helpers.truncate_screen_width(page['body'].join(''), 15)}")
+    format('%02s    %s', index, title)
+  end
+
 end

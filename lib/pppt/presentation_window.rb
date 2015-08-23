@@ -40,8 +40,8 @@ class PresentationWindow
         w.addstr(' ' * w.maxx)
         w.setpos(vindex, 3)
         w.standout if i == current
-        page_string = page_to_string(page)
-        w.addstr(page_string + (' ' * (w.maxx - Helpers.screen_width(page_string) - 4)))
+        page_number_string = Helpers.format_page_number(page)
+        w.addstr(page_number_string + (' ' * (w.maxx - Helpers.screen_width(page_number_string) - 4)))
         vindex += 1
         w.standend if i == current
         break if i >= start_point + height
@@ -83,13 +83,6 @@ class PresentationWindow
   def render_time(w)
     w.setpos(1, w.maxx - 10)
     w.addstr(Time.now.strftime('%H:%M:%S'))
-  end
-
-  # 目次ページでのページ番号の整形
-  def page_to_string(page)
-    index = page['page'] || '-'
-    title = page['action'] || (page['title'] && " - #{page['title']}") || page['h1'] || page['h2'] || page['h3'] || (page['body'] && "     #{Helpers.truncate_screen_width(page['body'].join(''), 15)}")
-    format('%02s    %s', index, title)
   end
 
   # ページコンテンツを表示する
