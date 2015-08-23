@@ -2,6 +2,10 @@
 
 Simple presentation tool on console.
 
+## Demo
+
+![image](https://cloud.githubusercontent.com/assets/1835490/9430249/ccd4b73e-4a28-11e5-9e72-1d610b8b4315.gif)
+
 ## Installation
 
 install it yourself as:
