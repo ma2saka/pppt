@@ -1,0 +1,71 @@
+#!/usr/bin/env ruby
+#-*- coding:utf-8 -*-
+require 'yaml'
+require 'pppt'
+require 'thor'
+
+# Pppt Command Line Application
+class App < Thor
+  desc 'show', 'show presentaion (default input: presentaion.yml)'
+  def show(file = 'presentaion.yml')
+    unless File.exist?(file)
+      STDERR.puts "pppt: #{file}: No such file"
+      exit 1
+    end
+
+    data = YAML.load(open(file))
+    ::Presentation.new(data).run
+  end
+
+  desc 'init', 'create presentation template'
+  def init(filename = 'presentaion.yml')
+    if File.exist?(filename)
+      STDERR.puts "pppt: #{filename}: File Already Exists."
+      exit 1
+    end
+    content = <<EOF
+- action: logo
+
+- action: Jacket
+  h1: Sample Presentation
+  h2: #{Date.today} < Your Name >
+
+- h3: Sub Title
+
+- title: Hello Sample Presentation
+  body:
+  - Operation Arrow keys, Spacebar, Enter, and BS.
+  - '"l" : show page list.'
+  - '":q" : quit.'
+
+- title: Nested List Style
+  body:
+  - level 1
+  -
+    - level 2 -1
+    - level 2 -2
+    - level 2 -3
+  -
+    -
+      - level 3 -1
+      - level 3 -3
+
+- title: Multiline text
+  body:
+  - multi line string support.
+  - |
+    """fibo
+    """
+    def fibo(n):
+      if n == 0 or n == 1: return 1
+        return fibo(n - 1) + fibo(n - 2)
+
+- h3: Thank you!
+
+EOF
+    File.write(filename, content)
+    STDOUT.puts "pppt: #{filename}: Created"
+  end
+end
+
+App.start

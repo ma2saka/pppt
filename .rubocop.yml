@@ -1,0 +1,7 @@
+# 自動生成されるものはチェック対象から除外する
+AllCops:
+  Exclude:
+    - "vendor/**/*" # rubocop config/default.yml
+    - "db/schema.rb"
+    - "pppt.gemspec"
+  DisplayCopNames: true
