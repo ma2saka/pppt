@@ -101,7 +101,7 @@ class PresentationWindow
     case k
     when 'action'
       if v == 'logo'
-        text = 'powered by POOR POINT 1.0'
+        text = "powered by POOR POINT PRESENTATION #{Pppt::VERSION}"
         w.setpos((w.maxy / 2) - 2, (w.maxx - text.length) / 2)
         if !@started
           text.each_char do |c|
