@@ -1,4 +1,4 @@
-class Helpers
+class Pppt::Helpers
   def self.truncate_screen_width(str, width, suffix = '...')
     i = 0
     str.each_char.inject(0) do |c, x|

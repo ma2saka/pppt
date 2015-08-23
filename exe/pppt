@@ -14,7 +14,7 @@ class App < Thor
     end
 
     data = YAML.load(open(file))
-    ::Presentation.new(data).run
+    ::Pppt::Presentation.new(data).run
   end
 
   desc 'init', 'create presentation template'

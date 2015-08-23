@@ -1,6 +1,6 @@
-class PresentationWindow
+class Pppt::PresentationWindow
   def initialize(data)
-    @pages = PresentationPages.new(data)
+    @pages = Pppt::PresentationPages.new(data)
     @current = 0
     @max = @pages.size
     init_screen
@@ -40,8 +40,8 @@ class PresentationWindow
         w.addstr(' ' * w.maxx)
         w.setpos(vindex, 3)
         w.standout if i == current
-        page_number_string = Helpers.format_page_number(page)
-        w.addstr(page_number_string + (' ' * (w.maxx - Helpers.screen_width(page_number_string) - 4)))
+        page_number_string = Pppt::Helpers.format_page_number(page)
+        w.addstr(page_number_string + (' ' * (w.maxx - Pppt::Helpers.screen_width(page_number_string) - 4)))
         vindex += 1
         w.standend if i == current
         break if i >= start_point + height
@@ -88,7 +88,7 @@ class PresentationWindow
   # ページコンテンツを表示する
   def write_element(w, k, v)
     len = 1
-    len = Helpers.screen_width(v) if v.is_a? String
+    len = Pppt::Helpers.screen_width(v) if v.is_a? String
     width = w.maxx - 1
     pad = ' ' * ((width - len) / 2)
     case k
@@ -127,7 +127,7 @@ class PresentationWindow
       v.split("\n").each do |x|
         x.chomp!
         w.setpos((w.maxy / 2) - 2 + vindex, 0)
-        len = Helpers.screen_width(x)
+        len = Pppt::Helpers.screen_width(x)
         pad = ' ' * ((width - len) / 2)
         w.addstr("#{pad}#{x}#{pad}")
         vindex += 1
@@ -164,7 +164,7 @@ class PresentationWindow
       sp = ['*', '-', '>'][level - 1]
       indent = ' ' * (level * 2)
       lines.split("\n").each do |x|
-        Helpers.split_screen_width(x, width - (4 + 4 * level)).each do |xl|
+        Pppt::Helpers.split_screen_width(x, width - (4 + 4 * level)).each do |xl|
           w.setpos(vi, 2)
           w.addstr("#{indent}#{sp} #{xl}")
           sp = ' '

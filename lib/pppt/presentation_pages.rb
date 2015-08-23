@@ -1,4 +1,4 @@
-class PresentationPages
+class Pppt::PresentationPages
   attr_reader :data, :size
   def initialize(pages)
     @data = pages

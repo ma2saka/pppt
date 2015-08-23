@@ -5,9 +5,9 @@ require 'pppt/presentation_pages'
 require 'pppt/presentation_window'
 include Curses
 
-class Presentation
+class Pppt::Presentation
   def initialize(pages)
-    @window = PresentationWindow.new(pages)
+    @window = Pppt::PresentationWindow.new(pages)
     @prev_ch = nil
     Curses.stdscr.keypad(true)
     Curses.noecho
