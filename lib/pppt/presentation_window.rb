@@ -152,7 +152,7 @@ class PresentationWindow
       vindex = 5
       w.setpos(vindex, 2)
       v.each do |line|
-        vindex = render_line(w, line, vindex, 1)
+        vindex = render_body_text(w, line, vindex)
       end
     when 'page'
       w.setpos(w.maxy - 2, 0)
@@ -160,12 +160,12 @@ class PresentationWindow
     end
   end
 
-  def render_line(w, lines, vindex, level)
+  def render_body_text(w, lines, vindex, level = 1)
     width = w.maxx - 4
     vi = vindex + 1
     if lines.is_a? Array
       lines.each do |sub_line|
-        vi = render_line(w, sub_line, vi, level + 1)
+        vi = render_body_text(w, sub_line, vi, level + 1)
       end
     else
       sp = ['*', '-', '>'][level - 1]
